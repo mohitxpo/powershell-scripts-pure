@@ -1,5 +1,8 @@
-﻿$FlashArrayID = Read-Host -Prompt "Enter the Pure Storage FlashArray (IP/FQDN)" 
-$FlashArray = New-PfaArray -EndPoint $FlashArrayID -Credentials (Get-Credential) -IgnoreCertificateError
+﻿$FlashArrayID = Read-Host sedpure01.xpo.com
+$username = $env:FLASHARRAY_USER
+$password = $env:FLASHARRAY_PASS | ConvertTo-SecureString -AsPlainText -Force
+$credentials = New-Object System.Management.Automation.PSCredential($username, $password)
+$FlashArray = New-PfaArray -EndPoint $FlashArrayID -Credentials $credentials -IgnoreCertificateError
 
 $ConnectedVolumes = @($null)
 $AllVolumes = @($null)
